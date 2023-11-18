@@ -1,0 +1,16 @@
+{{template "header"}}
+
+<main>
+    <form action="/ascii-art/"  method="POST">
+       <textarea name="input" cols="50" rows="8"></textarea>
+       <br> <br>
+        <select name="font">.html
+            <option value="standard">Standard</option>
+            <option value="thinkertoy">Thinkertoy</option>
+            <option value="shadow">Shadow</option>
+        </select>
+        <br> <br>
+        <input type="submit" name="process" value="submit" >
+    </form><pre><div>{{.Output}}</div></pre></main>
+
+{{template "footer"}}
