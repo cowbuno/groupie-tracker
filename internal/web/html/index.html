@@ -1,16 +1,21 @@
-{{template "header"}}
+{{define "index"}}
 
-<main>
-    <form action="/ascii-art/"  method="POST">
-       <textarea name="input" cols="50" rows="8"></textarea>
-       <br> <br>
-        <select name="font">.html
-            <option value="standard">Standard</option>
-            <option value="thinkertoy">Thinkertoy</option>
-            <option value="shadow">Shadow</option>
-        </select>
-        <br> <br>
-        <input type="submit" name="process" value="submit" >
-    </form><pre><div>{{.Output}}</div></pre></main>
-
-{{template "footer"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Groupie-tracker</title>
+</head>
+<body>
+    <h1>Groupie-tracker</h1>
+    
+    {{range .}}
+    <a href="/artist?id={{.Id}}">
+        <img src="{{.Image}}" class="image" alt="image">
+    </a>
+    {{end}}
+</body>
+</html>
+{{end}}
