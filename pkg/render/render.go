@@ -1,10 +1,10 @@
 package render
 
 import (
-	"groupie/internal/config"
-	"groupie/internal/models"
 	"bytes"
 	"fmt"
+	"groupie/pkg/config"
+	"groupie/pkg/models"
 	"log"
 	"net/http"
 	"path/filepath"
