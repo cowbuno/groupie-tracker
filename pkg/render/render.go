@@ -3,8 +3,8 @@ package render
 import (
 	"bytes"
 	"fmt"
-	"groupie/pkg/config"
-	"groupie/pkg/models"
+	"groupie/internal/config"
+	"groupie/internal/models"
 	"log"
 	"net/http"
 	"path/filepath"
