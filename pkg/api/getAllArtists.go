@@ -21,9 +21,10 @@ func GetJson(url string, target interface{}) error {
 	return json.NewDecoder(resp.Body).Decode(target)
 }
 
-func GetArtists() (*[]models.Artist, error) {
+func GetArtists() (*[]models.AllArtists, error) {
 	client = &http.Client{Timeout: 10 * time.Second}
-	var artists []models.Artist
+
+	var artists []models.AllArtists
 	err := GetJson(url, &artists)
 	if err != nil {
 		return nil, err
