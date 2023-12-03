@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"groupie/pkg/api"
 	"groupie/pkg/models"
 	"groupie/pkg/render"
@@ -19,7 +20,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	Artists, err := api.GetArtists()
-
+	fmt.Print(Artists)
 	if err != nil {
 		ErrorHandler(w, r, errors[500])
 	}
