@@ -9,7 +9,9 @@
 </head>
 <body>
     {{range index .Data "Artists"}}
-        <p> {{.ID}} - {{.Name}} </p>
+        <p> {{.Name}}</p>
+          <p> <img src="{{.Image}}" alt=""></p> 
+        <p>{{.CreationDate}} </p>
     {{end}}
 </body>
 </html>
