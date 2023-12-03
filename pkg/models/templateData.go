@@ -7,5 +7,5 @@ type TemplateData struct {
 	Data        map[string]interface{}
 	Flash       string
 	Warning     string
-	Error       string
+	Error       int
 }

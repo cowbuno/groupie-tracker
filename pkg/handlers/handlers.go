@@ -14,9 +14,11 @@ var t *template.Template
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		ErrorHandler(w, r, errors[404])
+		return
 	}
 	if r.Method != "GET" {
 		ErrorHandler(w, r, errors[405])
+		return
 	}
 
 	Artists, err := api.GetArtists()
