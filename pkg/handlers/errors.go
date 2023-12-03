@@ -1,10 +1,10 @@
 package handlers
 
 import (
+	"groupie/pkg/models"
+	"groupie/pkg/render"
 	"net/http"
 )
-
-var err error
 
 type errs struct {
 	Code int
@@ -34,8 +34,10 @@ var (
 
 func ErrorHandler(w http.ResponseWriter, r *http.Request, myErr errs) {
 	w.WriteHeader(myErr.Code)
-	err := t.ExecuteTemplate(w, "error.html", myErr)
-	if err != nil {
-		http.Error(w, "Internal Server Error", 500)
-	}
+
+	render.RenderTemplate(w, "error.page.html", &models.TemplateData{
+		Error:   myErr.Code,
+		Warning: myErr.Msg,
+	})
+
 }
