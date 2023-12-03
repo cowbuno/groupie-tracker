@@ -17,7 +17,9 @@ type Relations struct {
 	DatesLocations map[string][]string `json:"datesLocations"`
 }
 
-type ArtistDataID struct {
-	Artist    Artist
-	Relations Relations
+type AllArtists struct {
+	ID           int    `json:"id"`
+	Image        string `json:"image"`
+	Name         string `json:"name"`
+	CreationDate int    `json:"creationDate"`
 }
