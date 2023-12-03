@@ -2,7 +2,7 @@ package api
 
 import (
 	"encoding/json"
-	"groupie/internal/models"
+	"groupie/pkg/models"
 	"net/http"
 	"time"
 )
