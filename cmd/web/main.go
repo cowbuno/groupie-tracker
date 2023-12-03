@@ -27,6 +27,7 @@ func main() {
 	fmt.Println("Listening on http://localhost:8080/ ... ")
 
 	mux.HandleFunc("/", handlers.IndexHandler)
+	mux.HandleFunc("/artist", handlers.ArtistHandler)
 
 	err = http.ListenAndServe(":8080", mux)
 	if err != nil {

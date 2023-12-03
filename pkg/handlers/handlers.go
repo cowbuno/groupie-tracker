@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"groupie/pkg/api"
 	"groupie/pkg/models"
 	"groupie/pkg/render"
@@ -22,7 +21,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	Artists, err := api.GetArtists()
-	fmt.Print(Artists)
+	//fmt.Print(Artists)
 	if err != nil {
 		ErrorHandler(w, r, errors[500])
 	}
@@ -30,6 +29,30 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	Data := make(map[string]interface{})
 
 	Data["Artists"] = Artists
+
+	render.RenderTemplate(w, "index.page.html", &models.TemplateData{
+		Data: Data,
+	})
+}
+func ArtistHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/artist" {
+		ErrorHandler(w, r, errors[404])
+		return
+	}
+	if r.Method != "GET" {
+		ErrorHandler(w, r, errors[405])
+		return
+	}
+	artistID := r.URL.Query().Get("id")
+	Artist, err := api.GetArtist(artistID)
+	//fmt.Print(Artist)
+	if err != nil {
+		ErrorHandler(w, r, errors[500])
+	}
+
+	Data := make(map[string]interface{})
+
+	Data["Artist"] = Artist
 
 	render.RenderTemplate(w, "index.page.html", &models.TemplateData{
 		Data: Data,

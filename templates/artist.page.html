@@ -1,0 +1,29 @@
+{{template "base" .}}
+
+{{define "content"}}
+
+
+    {{range index .Data "Artists"}}
+
+        <ul class="artist-page">
+            <li class="artist-item">
+                    <img class="artist-image" src="{{ .Image}}" alt="">
+                <p class="artist-name">{{.Name }}</p>
+                <p class="artist-creation-date">{{.CreationDate }}</p>
+                <p class="members">
+                    {{range .Members}}
+                    <ul>
+                        <li>
+                            {{ . }}
+                        </li>
+                    </ul>
+                    {{end}}
+                </p>
+                <p class="firstAlbum">
+                    {{.firstAlbum}}
+                </p>
+            </li>
+        </ul>
+    {{end}}
+
+{{end}}
