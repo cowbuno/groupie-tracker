@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"groupie/internal/models"
 	"net/http"
+	"time"
 )
 
 var client *http.Client
@@ -21,7 +22,7 @@ func GetJson(url string, target interface{}) error {
 }
 
 func GetArtists() (*[]models.Artist, error) {
-
+	client = &http.Client{Timeout: 10 * time.Second}
 	var artists []models.Artist
 	err := GetJson(url, &artists)
 	if err != nil {

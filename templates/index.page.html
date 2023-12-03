@@ -8,9 +8,8 @@
 
 </head>
 <body>
-    {{$artists :=  index .Data "Artists"}}
-    {{range artists}}
-        <p></p>
+    {{range index .Data "Artists"}}
+        <p> {{.ID}} - {{.Name}} </p>
     {{end}}
 </body>
 </html>

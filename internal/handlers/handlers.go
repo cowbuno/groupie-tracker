@@ -35,5 +35,4 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "index.page.html", &models.TemplateData{
 		Data: Data,
 	})
-
 }

@@ -27,9 +27,11 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 	var tc map[string]*template.Template
 
 	if app.UseCache {
+
 		tc = app.TemplateCache
 	} else {
 		tc, _ = CreateTemplateCache()
+		fmt.Println(tc)
 	}
 	t, ok := tc[tmpl]
 	if !ok {
