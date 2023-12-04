@@ -4,9 +4,17 @@
 
 
     {{range index .Data "Artists"}}
-    <a><img src="{{.Image}}" alt=""></a>
-    <p> {{.ID}} - {{.Name}} </p>
+    <a href="/artist?id={{.ID}}"> <div> 
+        <ul class="artist-list">
+            <li class="artist-item">
+                
+                    <img class="artist-image" src="{{ .Image}}" alt="">
+            
+                <p class="artist-name">{{.Name }}</p>
+                <p class="artist-creation-date">{{.CreationDate }}</p>
+            </li>
+        </ul>
+    </div></a>
     {{end}}
-
 
 {{end}}
