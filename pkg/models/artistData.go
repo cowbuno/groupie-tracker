@@ -26,6 +26,8 @@ type Relation struct {
 	DatesLocations map[string][]string `json:"datesLocations"`
 }
 
+
+
 func (a *Artist) GetLocationAndData() string {
 	res := ""
 

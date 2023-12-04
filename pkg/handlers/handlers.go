@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"groupie/pkg/api"
 	"groupie/pkg/models"
 	"groupie/pkg/render"
@@ -52,7 +51,6 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		ErrorHandler(w, r, errors[500])
 	}
-	fmt.Println(Artist.GetLocationAndData())
 
 	Data := make(map[string]interface{})
 
