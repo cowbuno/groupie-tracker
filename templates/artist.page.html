@@ -2,28 +2,24 @@
 
 {{define "content"}}
 
+    <h1>Artist</h1>
+    {{$a := index .Data "Artist"}}
 
-    {{range index .Data "Artists"}}
-
-        <ul class="artist-page">
-            <li class="artist-item">
-                    <img class="artist-image" src="{{ .Image}}" alt="">
-                <p class="artist-name">{{.Name }}</p>
-                <p class="artist-creation-date">{{.CreationDate }}</p>
-                <p class="members">
-                    {{range .Members}}
-                    <ul>
-                        <li>
-                            {{ . }}
-                        </li>
-                    </ul>
-                    {{end}}
-                </p>
-                <p class="firstAlbum">
-                    {{.firstAlbum}}
-                </p>
-            </li>
-        </ul>
-    {{end}}
+    <ul class="artist-page">
+        <li class="artist-item">
+            <img class="artist-image" src="{{$a.Image}}" alt="">
+            <p class="artist-name">{{$a.Name}}</p>
+            <p class="artist-creation-date">{{$a.CreationDate}}</p>
+            <p class="members">
+                {{range $a.Members}}
+                <ul>
+                    <li>{{.}}</li>
+                </ul>
+                {{end}}
+            </p>
+            <p class="firstAlbum">{{$a.FirstAlbum}}</p>
+            <pre>{{$a.GetLocationAndData}}</pre>
+        </li>
+    </ul>
 
 {{end}}

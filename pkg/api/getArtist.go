@@ -10,7 +10,9 @@ import (
 
 var client *http.Client
 
-const url = "https://groupietrackers.herokuapp.com/api/artists"
+const urlArtist = "https://groupietrackers.herokuapp.com/api/artists"
+const urlLocation = "https://groupietrackers.herokuapp.com/api/locations"
+const urlRelation = "https://groupietrackers.herokuapp.com/api/relation"
 
 func init() {
 	client = &http.Client{Timeout: 10 * time.Second}
@@ -26,39 +28,70 @@ func GetJson(url string, target interface{}) error {
 	return json.NewDecoder(resp.Body).Decode(target)
 }
 
-func GetArtists() (*[]models.AllArtists, error) {
+func GetAllArtists() (*[]models.Artist, error) {
 
-	var artists []models.AllArtists
-	err := GetJson(url, &artists)
+	type ArtistSubset struct {
+		ID           int    `json:"id"`
+		Image        string `json:"image"`
+		Name         string `json:"name"`
+		CreationDate int    `json:"creationDate"`
+	}
+
+	var artistsSubset []ArtistSubset
+	err := GetJson(urlArtist, &artistsSubset)
 	if err != nil {
 		return nil, err
 	}
-
-	return &artists, nil
-}
-
-func GetArtist(id string) (*[]models.Artist, error) {
 	var artists []models.Artist
-	urlId := url + "/" + id
-	fmt.Print(urlId)
-	err := GetJson(urlId, &artists)
-	if err != nil {
-		return nil, err
+
+	for _, subset := range artistsSubset {
+		artist := models.Artist{
+			ID:           subset.ID,
+			Image:        subset.Image,
+			Name:         subset.Name,
+			CreationDate: subset.CreationDate,
+			// Initialize other fields as needed
+		}
+		artists = append(artists, artist)
 	}
 
 	return &artists, nil
 }
 
-// func GetLocationByID(ID int) (*Location, error) {
-// 	url := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/locations/%d", ID)
+func GetArtistByID(ID string) (*models.Artist, error) {
+	var artist models.Artist
+	urlId := urlArtist + "/" + ID
+	err := GetJson(urlId, &artist)
+	if err != nil {
+		return nil, err
+	}
 
-// 	var location Location
-// 	err := GetJson(url, &location)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return &location, nil
-// }
+	location, err := GetLocationByID(ID)
+	if err != nil {
+		return nil, err
+	}
+	artist.Location = location
+
+	relation, err := GetRelationByID(ID)
+	fmt.Println(relation)
+	if err != nil {
+		return nil, err
+	}
+	artist.Relation = relation
+
+	return &artist, nil
+}
+
+func GetLocationByID(ID string) (*models.Location, error) {
+	url := urlLocation + "/" + ID
+	fmt.Println(url)
+	var location models.Location
+	err := GetJson(url, &location)
+	if err != nil {
+		return nil, err
+	}
+	return &location, nil
+}
 
 // func GetDatesByID(ID int) (*Date, error) {
 // 	url := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/dates/%d", ID)
@@ -73,14 +106,13 @@ func GetArtist(id string) (*[]models.Artist, error) {
 
 // }
 
-// func GetRelationByID(ID int) (*Relation, error) {
-// 	url := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/relation/%d", ID)
+func GetRelationByID(ID string) (*models.Relation, error) {
+	url := urlRelation + "/" + ID
+	var relation models.Relation
 
-// 	var relation Relation
-
-// 	err := GetJson(url, &relation)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return &relation, nil
-// }
+	err := GetJson(url, &relation)
+	if err != nil {
+		return nil, err
+	}
+	return &relation, nil
+}
