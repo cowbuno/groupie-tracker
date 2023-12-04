@@ -35,3 +35,15 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		Data: Data,
 	})
 }
+
+func ArtistPage(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/artist" {
+		ErrorHandler(w, r, errors[404])
+		return
+	}
+	
+	if r.Method != "GET" {
+		ErrorHandler(w, r, errors[405])
+		return
+	}
+}
