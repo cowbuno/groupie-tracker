@@ -24,6 +24,9 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	fs := http.FileServer(http.Dir("./static"))
+	mux.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	fmt.Println("Listening on http://localhost:8080/ ... ")
 
 	mux.HandleFunc("/", handlers.IndexHandler)

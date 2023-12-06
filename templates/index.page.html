@@ -1,20 +1,23 @@
 {{template "base" .}}
 
+{{define "css"}}
+<link rel="stylesheet" type="text/css" href="static/css/index.css">
+{{end}}
+
+
 {{define "content"}}
 
-
+    <h1>Groupie</h1>
     {{range index .Data "Artists"}}
-    <a href="/artist?id={{.ID}}"> <div> 
-        <ul class="artist-list">
-            <li class="artist-item">
-                
-                    <img class="artist-image" src="{{ .Image}}" alt="">
-            
-                <p class="artist-name">{{.Name }}</p>
-                <p class="artist-creation-date">{{.CreationDate }}</p>
-            </li>
-        </ul>
-    </div></a>
+    <div class="artist-item">
+        <a href="/artist?id={{.ID}}">
+            <div class="artist-info">
+                <img class="artist-image" src="{{ .Image }}" alt="">
+                <p class="artist-name">{{.Name}}</p>
+                <p class="artist-creation-date">{{.CreationDate}}</p>
+            </div>
+        </a>
+    </div>
     {{end}}
 
 {{end}}

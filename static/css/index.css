@@ -1,0 +1,44 @@
+/* Reset default list styles */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style for each artist item */
+.artist-item {
+    display: inline-block;
+    margin: 10px;
+}
+
+/* Style for artist information container */
+.artist-info {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effect */          
+.artist-item:hover .artist-info {
+    transform: scale(1.05); /* Increase size on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a shadow on hover */
+}
+
+/* Style for artist image */
+.artist-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style for artist name */
+.artist-name {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Style for artist creation date */
+.artist-creation-date {
+    color: #666;
+}

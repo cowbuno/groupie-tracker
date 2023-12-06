@@ -20,7 +20,7 @@ type Location struct {
 	ID       int      `json:"id"`
 	Location []string `json:"locations"`
 }
-
+	
 type Relation struct {
 	ID             int                 `json:"id"`
 	DatesLocations map[string][]string `json:"datesLocations"`

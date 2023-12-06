@@ -5,6 +5,7 @@ import (
 	"groupie/pkg/models"
 	"groupie/pkg/render"
 	"net/http"
+	"strconv"
 	"text/template"
 )
 
@@ -47,9 +48,17 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 
 	artistID := r.URL.Query().Get("id")
 
+	_, err := strconv.Atoi(artistID)
+
+	if err != nil {
+		ErrorHandler(w, r, errors[400])
+		return
+	}
+
 	Artist, err := api.GetArtistByID(artistID)
 	if err != nil {
-		ErrorHandler(w, r, errors[500])
+		ErrorHandler(w, r, errors[404])
+		return
 	}
 
 	Data := make(map[string]interface{})
