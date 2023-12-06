@@ -19,5 +19,19 @@
         </a>
     </div>
     {{end}}
+    <div class="loader"></div>
 
 {{end}}
+
+{{define "js"}}
+
+<script>
+    window.addEventListener("load", ()=>{
+        const loader = document.querySelector(".loader");
+
+        loader.classList.add("loader-hidden")
+    })
+</script>
+    
+{{end}}
+
